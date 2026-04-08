@@ -1,0 +1,2 @@
+-- Seed data for local development
+-- Run: npx supabase db seed
