@@ -3,7 +3,9 @@
     "allow": [
       "Bash(npm --version)",
       "Bash(npm install:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(npm list *)",
+      "Bash(npm run *)"
     ]
   }
 }
