@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
-import { Plus, Pencil } from 'lucide-react'
+import { Plus, Pencil, Eye } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 import { Badge } from '@/components/ui/badge'
 import {
@@ -77,6 +77,13 @@ export default async function InvoicesPage() {
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center gap-1">
+                      <Link
+                        href={`/invoices/${invoice.id}`}
+                        className="rounded p-1 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+                        title="Voir le détail"
+                      >
+                        <Eye className="h-4 w-4" />
+                      </Link>
                       <Link
                         href={`/invoices/${invoice.id}/edit`}
                         className="rounded p-1 text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"

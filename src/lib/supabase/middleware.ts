@@ -32,7 +32,15 @@ export async function updateSession(request: NextRequest) {
 
   const { pathname } = request.nextUrl
 
-  // Public paths that don't require auth
+  // Fully public paths — no auth check at all
+  const isPublicPath =
+    pathname.startsWith('/pay/') ||        // debtor payment pages
+    pathname.startsWith('/api/webhooks/') || // Stripe webhooks
+    pathname.startsWith('/api/cron/')        // Vercel cron jobs (secured by CRON_SECRET)
+
+  if (isPublicPath) return supabaseResponse
+
+  // Auth pages (login, signup, forgot-password)
   const isAuthPath =
     pathname.startsWith('/login') ||
     pathname.startsWith('/signup') ||

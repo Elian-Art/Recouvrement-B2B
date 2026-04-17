@@ -8,6 +8,7 @@ import {
   FileText,
   Settings,
   Building2,
+  Bell,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -15,6 +16,7 @@ const navItems = [
   { href: '/', label: 'Tableau de bord', icon: LayoutDashboard },
   { href: '/debtors', label: 'Débiteurs', icon: Building2 },
   { href: '/invoices', label: 'Factures', icon: FileText },
+  { href: '/settings/reminders', label: 'Relances', icon: Bell },
   { href: '/settings/organization', label: 'Paramètres', icon: Settings },
 ]
 

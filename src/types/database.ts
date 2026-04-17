@@ -142,6 +142,8 @@ export type Database = {
           description: string | null
           stripe_payment_link: string | null
           paid_at: string | null
+          payment_token: string
+          reminder_scenario_id: string | null
           created_at: string
           updated_at: string
         }
@@ -158,6 +160,8 @@ export type Database = {
           description?: string | null
           stripe_payment_link?: string | null
           paid_at?: string | null
+          payment_token?: string
+          reminder_scenario_id?: string | null
           created_at?: string
           updated_at?: string
         }
@@ -172,6 +176,8 @@ export type Database = {
           description?: string | null
           stripe_payment_link?: string | null
           paid_at?: string | null
+          payment_token?: string
+          reminder_scenario_id?: string | null
           updated_at?: string
         }
         Relationships: [
@@ -305,6 +311,79 @@ export type Database = {
           }
         ]
       }
+      reminder_scenarios: {
+        Row: {
+          id: string
+          org_id: string
+          name: string
+          is_default: boolean
+          is_active: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          org_id: string
+          name: string
+          is_default?: boolean
+          is_active?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          name?: string
+          is_default?: boolean
+          is_active?: boolean
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'reminder_scenarios_org_id_fkey'
+            columns: ['org_id']
+            isOneToOne: false
+            referencedRelation: 'organizations'
+            referencedColumns: ['id']
+          }
+        ]
+      }
+      reminder_scenario_steps: {
+        Row: {
+          id: string
+          scenario_id: string
+          position: number
+          delay_days: number
+          channel: 'email' | 'sms'
+          subject_template: string | null
+          body_template: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          scenario_id: string
+          position?: number
+          delay_days: number
+          channel: 'email' | 'sms'
+          subject_template?: string | null
+          body_template: string
+          created_at?: string
+        }
+        Update: {
+          position?: number
+          delay_days?: number
+          channel?: 'email' | 'sms'
+          subject_template?: string | null
+          body_template?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'reminder_scenario_steps_scenario_id_fkey'
+            columns: ['scenario_id']
+            isOneToOne: false
+            referencedRelation: 'reminder_scenarios'
+            referencedColumns: ['id']
+          }
+        ]
+      }
     }
     Views: Record<never, never>
     Functions: {
@@ -329,3 +408,5 @@ export type FormalNotice = Database['public']['Tables']['formal_notices']['Row']
 
 export type InvoiceStatus = Invoice['status']
 export type UserRole = UserProfile['role']
+export type ReminderScenario = Database['public']['Tables']['reminder_scenarios']['Row']
+export type ReminderScenarioStep = Database['public']['Tables']['reminder_scenario_steps']['Row']
