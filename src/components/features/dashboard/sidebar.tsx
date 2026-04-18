@@ -9,6 +9,9 @@ import {
   Settings,
   Building2,
   Bell,
+  BarChart3,
+  AlertTriangle,
+  Activity,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -17,6 +20,9 @@ const navItems = [
   { href: '/debtors', label: 'Débiteurs', icon: Building2 },
   { href: '/invoices', label: 'Factures', icon: FileText },
   { href: '/settings/reminders', label: 'Relances', icon: Bell },
+  { href: '/formal-notices', label: 'Mises en demeure', icon: AlertTriangle },
+  { href: '/analytics', label: 'Analytics', icon: BarChart3 },
+  { href: '/activity', label: 'Activité', icon: Activity },
   { href: '/settings/organization', label: 'Paramètres', icon: Settings },
 ]
 

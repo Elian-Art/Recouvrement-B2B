@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Separator } from '@/components/ui/separator'
 import { ReminderTimeline } from './_components/reminder-timeline'
 import { PaymentLinkButton } from './_components/payment-link-button'
+import { GenerateNoticeButton } from './_components/generate-notice-button'
 
 interface Props {
   params: Promise<{ id: string }>
@@ -129,6 +130,19 @@ export default async function InvoiceDetailPage({ params }: Props) {
         <h2 className="text-lg font-medium mb-4">Historique des relances</h2>
         <ReminderTimeline reminders={reminders ?? []} />
       </div>
+
+      {['overdue', 'in_recovery'].includes(invoice.status) && (
+        <>
+          <Separator />
+          <div className="space-y-2">
+            <h2 className="text-lg font-medium">Escalade</h2>
+            <p className="text-sm text-muted-foreground">
+              Générez une mise en demeure officielle pour cette facture impayée.
+            </p>
+            <GenerateNoticeButton invoiceId={id} />
+          </div>
+        </>
+      )}
     </div>
   )
 }

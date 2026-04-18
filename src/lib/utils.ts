@@ -24,9 +24,12 @@ export function formatDate(date: string): string {
 export const invoiceStatusLabels: Record<InvoiceStatus, string> = {
   pending: 'En attente',
   overdue: 'En retard',
+  in_recovery: 'En recouvrement',
   paid: 'Payée',
   cancelled: 'Annulée',
   in_dispute: 'En litige',
+  formal_notice: 'Mise en demeure',
+  written_off: 'Perdue',
 }
 
 export const invoiceStatusVariant: Record<
@@ -35,7 +38,10 @@ export const invoiceStatusVariant: Record<
 > = {
   pending: 'secondary',
   overdue: 'destructive',
+  in_recovery: 'warning',
   paid: 'success',
   cancelled: 'outline',
   in_dispute: 'warning',
+  formal_notice: 'destructive',
+  written_off: 'outline',
 }

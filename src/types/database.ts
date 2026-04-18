@@ -138,7 +138,7 @@ export type Database = {
           currency: string
           issued_at: string
           due_at: string
-          status: 'pending' | 'overdue' | 'paid' | 'cancelled' | 'in_dispute'
+          status: 'pending' | 'overdue' | 'in_recovery' | 'paid' | 'cancelled' | 'in_dispute' | 'formal_notice' | 'written_off'
           description: string | null
           stripe_payment_link: string | null
           paid_at: string | null
@@ -172,7 +172,7 @@ export type Database = {
           currency?: string
           issued_at?: string
           due_at?: string
-          status?: 'pending' | 'overdue' | 'paid' | 'cancelled' | 'in_dispute'
+          status?: 'pending' | 'overdue' | 'in_recovery' | 'paid' | 'cancelled' | 'in_dispute' | 'formal_notice' | 'written_off'
           description?: string | null
           stripe_payment_link?: string | null
           paid_at?: string | null
@@ -282,28 +282,75 @@ export type Database = {
           id: string
           org_id: string
           invoice_id: string
+          debtor_id: string | null
           pdf_url: string | null
+          status: 'generated' | 'sent_email' | 'sent_postal' | 'acknowledged'
           sent_at: string | null
           method: 'email' | 'mail' | 'both' | null
+          generated_at: string
           created_at: string
         }
         Insert: {
           id?: string
           org_id: string
           invoice_id: string
+          debtor_id?: string | null
           pdf_url?: string | null
+          status?: 'generated' | 'sent_email' | 'sent_postal' | 'acknowledged'
           sent_at?: string | null
           method?: 'email' | 'mail' | 'both' | null
+          generated_at?: string
           created_at?: string
         }
         Update: {
+          debtor_id?: string | null
           pdf_url?: string | null
+          status?: 'generated' | 'sent_email' | 'sent_postal' | 'acknowledged'
           sent_at?: string | null
           method?: 'email' | 'mail' | 'both' | null
         }
         Relationships: [
           {
             foreignKeyName: 'formal_notices_org_id_fkey'
+            columns: ['org_id']
+            isOneToOne: false
+            referencedRelation: 'organizations'
+            referencedColumns: ['id']
+          },
+          {
+            foreignKeyName: 'formal_notices_invoice_id_fkey'
+            columns: ['invoice_id']
+            isOneToOne: false
+            referencedRelation: 'invoices'
+            referencedColumns: ['id']
+          }
+        ]
+      }
+      activity_logs: {
+        Row: {
+          id: string
+          org_id: string
+          actor_id: string | null
+          entity_type: 'invoice' | 'reminder' | 'payment' | 'formal_notice' | 'debtor'
+          entity_id: string
+          action: string
+          details: Record<string, unknown> | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          org_id: string
+          actor_id?: string | null
+          entity_type: 'invoice' | 'reminder' | 'payment' | 'formal_notice' | 'debtor'
+          entity_id: string
+          action: string
+          details?: Record<string, unknown> | null
+          created_at?: string
+        }
+        Update: Record<string, never>
+        Relationships: [
+          {
+            foreignKeyName: 'activity_logs_org_id_fkey'
             columns: ['org_id']
             isOneToOne: false
             referencedRelation: 'organizations'
@@ -410,3 +457,4 @@ export type InvoiceStatus = Invoice['status']
 export type UserRole = UserProfile['role']
 export type ReminderScenario = Database['public']['Tables']['reminder_scenarios']['Row']
 export type ReminderScenarioStep = Database['public']['Tables']['reminder_scenario_steps']['Row']
+export type ActivityLog = Database['public']['Tables']['activity_logs']['Row']
