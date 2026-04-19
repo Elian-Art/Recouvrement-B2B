@@ -10,7 +10,10 @@ export type Database = {
           slug: string
           billing_email: string | null
           stripe_customer_id: string | null
+          stripe_subscription_id: string | null
           plan: string
+          locale: string
+          onboarding_completed: boolean
           created_at: string
           updated_at: string
         }
@@ -20,7 +23,10 @@ export type Database = {
           slug: string
           billing_email?: string | null
           stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
           plan?: string
+          locale?: string
+          onboarding_completed?: boolean
           created_at?: string
           updated_at?: string
         }
@@ -30,7 +36,10 @@ export type Database = {
           slug?: string
           billing_email?: string | null
           stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
           plan?: string
+          locale?: string
+          onboarding_completed?: boolean
           updated_at?: string
         }
         Relationships: []
@@ -431,6 +440,96 @@ export type Database = {
           }
         ]
       }
+      email_templates: {
+        Row: {
+          id: string
+          org_id: string
+          key: string
+          channel: 'email' | 'sms'
+          name: string
+          subject: string | null
+          body: string
+          is_active: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          org_id: string
+          key: string
+          channel: 'email' | 'sms'
+          name: string
+          subject?: string | null
+          body: string
+          is_active?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          key?: string
+          channel?: 'email' | 'sms'
+          name?: string
+          subject?: string | null
+          body?: string
+          is_active?: boolean
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'email_templates_org_id_fkey'
+            columns: ['org_id']
+            isOneToOne: false
+            referencedRelation: 'organizations'
+            referencedColumns: ['id']
+          }
+        ]
+      }
+      integrations: {
+        Row: {
+          id: string
+          org_id: string
+          provider: 'quickbooks' | 'xero'
+          access_token: string
+          refresh_token: string | null
+          token_expires_at: string | null
+          external_org_id: string | null
+          config: Record<string, unknown> | null
+          last_synced_at: string | null
+          connected_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          org_id: string
+          provider: 'quickbooks' | 'xero'
+          access_token: string
+          refresh_token?: string | null
+          token_expires_at?: string | null
+          external_org_id?: string | null
+          config?: Record<string, unknown> | null
+          last_synced_at?: string | null
+          connected_at?: string
+          updated_at?: string
+        }
+        Update: {
+          access_token?: string
+          refresh_token?: string | null
+          token_expires_at?: string | null
+          external_org_id?: string | null
+          config?: Record<string, unknown> | null
+          last_synced_at?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: 'integrations_org_id_fkey'
+            columns: ['org_id']
+            isOneToOne: false
+            referencedRelation: 'organizations'
+            referencedColumns: ['id']
+          }
+        ]
+      }
     }
     Views: Record<never, never>
     Functions: {
@@ -458,3 +557,5 @@ export type UserRole = UserProfile['role']
 export type ReminderScenario = Database['public']['Tables']['reminder_scenarios']['Row']
 export type ReminderScenarioStep = Database['public']['Tables']['reminder_scenario_steps']['Row']
 export type ActivityLog = Database['public']['Tables']['activity_logs']['Row']
+export type EmailTemplate = Database['public']['Tables']['email_templates']['Row']
+export type Integration = Database['public']['Tables']['integrations']['Row']

@@ -1,0 +1,84 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "debtors": "Debtors",
+    "invoices": "Invoices",
+    "import": "CSV/Excel Import",
+    "reminders": "Reminders",
+    "formalNotices": "Formal Notices",
+    "analytics": "Analytics",
+    "activity": "Activity",
+    "templates": "Templates",
+    "billing": "Billing",
+    "integrations": "Integrations",
+    "settings": "Settings",
+    "team": "Team"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "loading": "Loading…",
+    "error": "An error occurred",
+    "success": "Saved successfully",
+    "back": "Back",
+    "search": "Search",
+    "noResults": "No results",
+    "confirm": "Confirm",
+    "close": "Close"
+  },
+  "invoice": {
+    "status": {
+      "pending": "Pending",
+      "overdue": "Overdue",
+      "paid": "Paid",
+      "cancelled": "Cancelled",
+      "in_dispute": "In dispute",
+      "in_recovery": "In recovery",
+      "formal_notice": "Formal notice",
+      "written_off": "Written off"
+    },
+    "amount": "Amount",
+    "dueDate": "Due date",
+    "invoiceNumber": "Invoice #",
+    "debtor": "Debtor",
+    "createdAt": "Created at"
+  },
+  "onboarding": {
+    "title": "Welcome to Recouvrement B2B",
+    "subtitle": "Set up your workspace in a few steps",
+    "step1": {
+      "title": "Your organization",
+      "description": "Verify your company information"
+    },
+    "step2": {
+      "title": "First debtor",
+      "description": "Add your first debtor"
+    },
+    "step3": {
+      "title": "First invoice",
+      "description": "Create your first unpaid invoice"
+    },
+    "step4": {
+      "title": "Reminder scenario",
+      "description": "Your default scenario is ready"
+    },
+    "skip": "Skip this step",
+    "next": "Next step",
+    "finish": "Finish setup",
+    "complete": "Setup complete!"
+  },
+  "billing": {
+    "currentPlan": "Current plan",
+    "manage": "Manage subscription",
+    "upgrade": "Upgrade plan",
+    "plans": {
+      "free": "Free",
+      "starter": "Starter",
+      "pro": "Pro",
+      "enterprise": "Enterprise"
+    }
+  }
+}

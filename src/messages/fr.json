@@ -1,0 +1,84 @@
+{
+  "nav": {
+    "dashboard": "Tableau de bord",
+    "debtors": "Débiteurs",
+    "invoices": "Factures",
+    "import": "Import CSV/Excel",
+    "reminders": "Relances",
+    "formalNotices": "Mises en demeure",
+    "analytics": "Analytics",
+    "activity": "Activité",
+    "templates": "Templates",
+    "billing": "Abonnement",
+    "integrations": "Intégrations",
+    "settings": "Paramètres",
+    "team": "Équipe"
+  },
+  "common": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "create": "Créer",
+    "loading": "Chargement…",
+    "error": "Une erreur est survenue",
+    "success": "Enregistré avec succès",
+    "back": "Retour",
+    "search": "Rechercher",
+    "noResults": "Aucun résultat",
+    "confirm": "Confirmer",
+    "close": "Fermer"
+  },
+  "invoice": {
+    "status": {
+      "pending": "En attente",
+      "overdue": "En retard",
+      "paid": "Payée",
+      "cancelled": "Annulée",
+      "in_dispute": "En litige",
+      "in_recovery": "En recouvrement",
+      "formal_notice": "Mise en demeure",
+      "written_off": "Perdue"
+    },
+    "amount": "Montant",
+    "dueDate": "Échéance",
+    "invoiceNumber": "N° Facture",
+    "debtor": "Débiteur",
+    "createdAt": "Créée le"
+  },
+  "onboarding": {
+    "title": "Bienvenue sur Recouvrement B2B",
+    "subtitle": "Configurez votre espace en quelques étapes",
+    "step1": {
+      "title": "Votre organisation",
+      "description": "Vérifiez vos informations d'entreprise"
+    },
+    "step2": {
+      "title": "Premier débiteur",
+      "description": "Ajoutez votre premier client débiteur"
+    },
+    "step3": {
+      "title": "Première facture",
+      "description": "Créez votre première facture impayée"
+    },
+    "step4": {
+      "title": "Scénario de relance",
+      "description": "Votre scénario par défaut est prêt"
+    },
+    "skip": "Passer cette étape",
+    "next": "Étape suivante",
+    "finish": "Terminer la configuration",
+    "complete": "Configuration terminée !"
+  },
+  "billing": {
+    "currentPlan": "Plan actuel",
+    "manage": "Gérer l'abonnement",
+    "upgrade": "Passer à un plan supérieur",
+    "plans": {
+      "free": "Gratuit",
+      "starter": "Starter",
+      "pro": "Pro",
+      "enterprise": "Enterprise"
+    }
+  }
+}

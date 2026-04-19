@@ -12,6 +12,10 @@ import {
   BarChart3,
   AlertTriangle,
   Activity,
+  Upload,
+  CreditCard,
+  Plug,
+  Mail,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -19,10 +23,14 @@ const navItems = [
   { href: '/', label: 'Tableau de bord', icon: LayoutDashboard },
   { href: '/debtors', label: 'Débiteurs', icon: Building2 },
   { href: '/invoices', label: 'Factures', icon: FileText },
+  { href: '/invoices/import', label: 'Import CSV/Excel', icon: Upload },
   { href: '/settings/reminders', label: 'Relances', icon: Bell },
   { href: '/formal-notices', label: 'Mises en demeure', icon: AlertTriangle },
   { href: '/analytics', label: 'Analytics', icon: BarChart3 },
   { href: '/activity', label: 'Activité', icon: Activity },
+  { href: '/settings/templates', label: 'Templates', icon: Mail },
+  { href: '/settings/billing', label: 'Abonnement', icon: CreditCard },
+  { href: '/settings/integrations', label: 'Intégrations', icon: Plug },
   { href: '/settings/organization', label: 'Paramètres', icon: Settings },
 ]
 

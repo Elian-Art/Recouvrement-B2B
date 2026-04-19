@@ -4,6 +4,11 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { Sidebar } from '@/components/features/dashboard/sidebar'
 import { Header } from '@/components/features/dashboard/header'
+import { I18nProvider } from '@/lib/i18n/provider'
+import fr from '@/messages/fr.json'
+import en from '@/messages/en.json'
+
+const messages = { fr, en } as Record<string, Record<string, unknown>>
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient()
@@ -16,7 +21,6 @@ export default async function DashboardLayout({ children }: { children: React.Re
     redirect('/login')
   }
 
-  // Load user profile
   const { data: profile } = await supabase
     .from('users')
     .select('*')
@@ -27,22 +31,24 @@ export default async function DashboardLayout({ children }: { children: React.Re
     redirect('/login')
   }
 
-  // Load org name separately
   const { data: org } = await supabase
     .from('organizations')
-    .select('name')
+    .select('name, locale, onboarding_completed')
     .eq('id', profile.org_id)
     .single()
 
   const orgName = org?.name ?? ''
+  const locale = (org?.locale ?? 'fr') as 'fr' | 'en'
 
   return (
-    <div className="flex h-screen overflow-hidden">
-      <Sidebar />
-      <div className="flex flex-1 flex-col overflow-hidden">
-        <Header user={profile} orgName={orgName} />
-        <main className="flex-1 overflow-y-auto bg-muted/20 p-6">{children}</main>
+    <I18nProvider locale={locale} messages={messages[locale] ?? fr}>
+      <div className="flex h-screen overflow-hidden">
+        <Sidebar />
+        <div className="flex flex-1 flex-col overflow-hidden">
+          <Header user={profile} orgName={orgName} />
+          <main className="flex-1 overflow-y-auto bg-muted/20 p-6">{children}</main>
+        </div>
       </div>
-    </div>
+    </I18nProvider>
   )
 }
