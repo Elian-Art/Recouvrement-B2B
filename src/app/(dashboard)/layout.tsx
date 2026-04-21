@@ -28,6 +28,8 @@ export default async function DashboardLayout({ children }: { children: React.Re
     .single()
 
   if (!profile) {
+    // Profile missing for authenticated user — sign out to break any redirect loop
+    await supabase.auth.signOut()
     redirect('/login')
   }
 

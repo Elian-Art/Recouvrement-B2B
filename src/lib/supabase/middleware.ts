@@ -34,30 +34,22 @@ export async function updateSession(request: NextRequest) {
 
   // Fully public paths — no auth check at all
   const isPublicPath =
-    pathname.startsWith('/pay/') ||        // debtor payment pages
-    pathname.startsWith('/api/webhooks/') || // Stripe webhooks
-    pathname.startsWith('/api/cron/')        // Vercel cron jobs (secured by CRON_SECRET)
+    pathname.startsWith('/pay/') ||
+    pathname.startsWith('/api/') ||         // API routes handle their own auth
+    pathname.startsWith('/auth/')           // Supabase auth callbacks
 
   if (isPublicPath) return supabaseResponse
 
   // Auth pages (login, signup, forgot-password)
-  const isAuthPath =
-    pathname.startsWith('/login') ||
-    pathname.startsWith('/signup') ||
-    pathname.startsWith('/forgot-password') ||
-    pathname.startsWith('/auth/')
+  const isAuthPage =
+    pathname === '/login' ||
+    pathname === '/signup' ||
+    pathname.startsWith('/forgot-password')
 
-  // Redirect unauthenticated users to login
-  if (!user && !isAuthPath) {
+  // Redirect unauthenticated users to login (never redirect /login itself)
+  if (!user && !isAuthPage) {
     const url = request.nextUrl.clone()
     url.pathname = '/login'
-    return NextResponse.redirect(url)
-  }
-
-  // Redirect authenticated users away from auth pages
-  if (user && isAuthPath) {
-    const url = request.nextUrl.clone()
-    url.pathname = '/'
     return NextResponse.redirect(url)
   }
 
